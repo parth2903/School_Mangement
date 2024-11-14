@@ -4,3 +4,25 @@
 @tailwind utilities;
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Target the sidebar scrollbars */
+aside::-webkit-scrollbar {
+  width: 6px; /* Thin scrollbar width */
+}
+
+/* Track */
+aside::-webkit-scrollbar-track {
+  background: #5b21b6; /* Darker purple for track */
+}
+
+/* Handle */
+aside::-webkit-scrollbar-thumb {
+  background: #9b5bd1; /* Lighter purple for scrollbar handle */
+  border-radius: 10px; /* Rounded edges */
+}
+
+/* Handle on hover */
+aside::-webkit-scrollbar-thumb:hover {
+  background: #bb86fc; /* Lighten color on hover */
+}
+

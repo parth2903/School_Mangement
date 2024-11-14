@@ -1,1 +1,28 @@
-<p>sidebar works!</p>
+<aside class="bg-purple-800 text-white w-64 h-screen p-4 flex flex-col space-y-2 fixed overflow-y-auto pb-16">
+  <a routerLink="/dashboard" class="text-lg font-semibold">Dashboard</a>
+
+  <div class="space-y-2">
+    <div class="flex items-center justify-between cursor-pointer" (click)="toggleSchoolManagement()">
+      <span class="font-semibold text-gray-300">School Management</span>
+      <i class="fas" [ngClass]="isSchoolManagementOpen ? 'fa-chevron-down' : 'fa-chevron-up'"></i>
+    </div>
+
+    <div *ngIf="isSchoolManagementOpen" class="pl-4 space-y-1">
+      <a routerLink="/school-management/room-management" routerLinkActive="bg-purple-700" class="block hover:bg-purple-700 p-2 rounded">Room Management</a>
+      <a routerLink="/school-management/student-management" routerLinkActive="bg-purple-700" class="block hover:bg-purple-700 p-2 rounded">Student Management</a>
+      <a routerLink="/school-management/staff-management" routerLinkActive="bg-purple-700" class="block hover:bg-purple-700 p-2 rounded">Staff Management</a>
+      <a routerLink="/school-management/enrollment" routerLinkActive="bg-purple-700" class="block hover:bg-purple-700 p-2 rounded">Enrollment</a>
+    </div>
+  </div>
+
+  <a routerLink="/communication" class="block hover:bg-purple-700 p-2 rounded">Communication</a>
+  <a routerLink="/check-in-out" class="block hover:bg-purple-700 p-2 rounded">Check In/Out</a>
+  <a routerLink="/events" class="block hover:bg-purple-700 p-2 rounded">Events</a>
+  <a routerLink="/daily-activity" class="block hover:bg-purple-700 p-2 rounded">Daily Activity</a>
+  <a routerLink="/fee-management" class="block hover:bg-purple-700 p-2 rounded">Fee Management</a>
+  <a routerLink="/authorize-pickup" class="block hover:bg-purple-700 p-2 rounded">Authorize Pickup</a>
+  <a routerLink="/integrations" class="block hover:bg-purple-700 p-2 rounded">Integrations</a>
+  <a routerLink="/reports" class="block hover:bg-purple-700 p-2 rounded">Reports</a>
+  <a routerLink="/faqs" class="block hover:bg-purple-700 p-2 rounded">FAQs</a>
+</aside>
+
