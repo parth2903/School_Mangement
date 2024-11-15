@@ -1,1 +1,104 @@
-<p>student-management works!</p>
+<div class="p-6 bg-black rounded-lg shadow-lg">
+  <div class="flex justify-between items-center mb-4">
+    <div class="flex items-center">
+      <i class="fa-solid fa-school text-white text-3xl mb-6 mr-4"></i>
+      <h2 class="text-xl font-semibold text-white">Student Management</h2>
+    </div>
+    <button mat-raised-button color="primary" class="bg-gray-800 text-white text-xl rounded-xl px-4">
+      + New Student
+    </button>
+  </div>
+
+  <!-- Table Wrapper -->
+  <div class="w-full bg-gray-900 rounded-lg shadow overflow-hidden">
+    <table class="table-auto w-full text-white">
+      <!-- Table Header -->
+      <thead class="bg-gray-800">
+        <tr>
+          <th class="w-1/5 px-4 py-2 text-left">Student</th>
+          <th class="w-1/5 px-4 py-2 text-left">Parents</th>
+          <th class="w-1/5 px-4 py-2 text-left">Room</th>
+          <th class="w-7/20  py-2 text-center">
+              <span class="w-1/7 text-center px-4">Su</span>
+              <span class="w-1/7 text-center px-4">Mo</span>
+              <span class="w-1/7 text-center px-4">Tu</span>
+              <span class="w-1/7 text-center px-4">We</span>
+              <span class="w-1/7 text-center px-4">Th</span>
+              <span class="w-1/7 text-center px-4">Fr</span>
+              <span class="w-1/7 text-center px-4">Sa</span>
+          </th>
+        </tr>
+      </thead>
+
+      <!-- Table Body -->
+      <tbody>
+        <tr *ngFor="let student of students" class="border-b border-gray-700 ">
+          <!-- Student Column (25%) -->
+          <td class="w-1/5 px-4 py-2 flex items-center">
+            <span class="flex-shrink-0 rounded-full bg-purple-200 text-purple-600 w-8 h-8 flex items-center justify-center">{{ student.initials }}</span>
+            <span class="ml-2 whitespace-nowrap">{{ student.name }}</span>
+          </td>
+
+          <!-- Parents Column (20%) -->
+          <td class="w-1/5 px-4 py-2">
+            <div *ngFor="let parent of student.parents" class="flex items-center space-x-1">
+              <span>{{ parent }}</span>
+            </div>
+          </td>
+
+          <!-- Room Column (20%) -->
+          <td class="w-1/5 px-4 py-2">{{ student.room }}</td>
+
+          <!-- Attendance Column (35%) -->
+          <td class="w-7/20 px-4 py-2">
+            <div class="flex justify-between">
+              <div *ngFor="let day of ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']; let i = index" class="w-1/7 flex justify-center px-3">
+                <div class="w-4 h-4 rounded-full" [ngClass]="student.attendance[i] ? 'bg-purple-600' : 'bg-gray-300'"></div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+</div>
+
+<!-- <div class="w-full bg-gray-900 rounded-lg shadow overflow-hidden">
+  <div class="flex p-4 bg-gray-900 font-semibold border-b">
+    <div class="w-1/5 px-4 text-center">Student</div>
+    <div class="w-1/5 px-4 text-center">Parents</div>
+    <div class="w-1/5 px-4 text-center">Room</div>
+    <div class="w-7/20 px-4 text-center flex justify-between ml-12">
+      <div class="w-1/7 text-center px-3">Su</div>
+      <div class="w-1/7 text-center px-3">Mo</div>
+      <div class="w-1/7 text-center px-3">Tu</div>
+      <div class="w-1/7 text-center px-3">We</div>
+      <div class="w-1/7 text-center px-3">Th</div>
+      <div class="w-1/7 text-center px-3">Fr</div>
+      <div class="w-1/7 text-center px-3">Sa</div>
+    </div>
+  </div>
+
+  <div *ngFor="let student of students" class="flex p-2 border-b">
+    <div class="w-1/4 ml-4 flex items-center">
+      <span class="rounded-full bg-purple-200 text-purple-600 w-8 h-8 flex items-center justify-center">{{ student.initials }}</span>
+      <span class="ml-2">{{ student.name }}</span>
+    </div>
+
+    <div class="w-1/5 p-4">
+      <div *ngFor="let parent of student.parents" class="flex items-center space-x-1">
+        <span>{{ parent }}</span>
+        
+      </div>
+    </div>
+
+    <div class="w-1/5 p-4">{{ student.room }}</div>
+
+    <div class="w-7/20 py-4 flex justify-between ">
+      <div *ngFor="let day of ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']; let i = index" class="w-1/7 flex justify-center px-3.5">
+        <div class="w-4 h-4 rounded-full" [ngClass]="student.attendance[i] ? 'bg-purple-600' : 'bg-gray-300'"></div>
+      </div>
+    </div>
+  </div>
+</div> -->
