@@ -4,7 +4,7 @@
       <i class="fa-solid fa-school text-white text-3xl mb-6 mr-4"></i>
       <h2 class="text-xl font-semibold text-white">Student Management</h2>
     </div>
-    <button mat-raised-button color="primary" class="bg-gray-800 text-white text-xl rounded-xl px-4">
+    <button mat-raised-button color="primary" class="bg-gray-800 text-white text-xl rounded-xl px-4" (click)="openNewStudentDialog()">
       + New Student
     </button>
   </div>
@@ -41,8 +41,8 @@
 
           <!-- Parents Column (20%) -->
           <td class="w-1/5 px-4 py-2">
-            <div *ngFor="let parent of student.parents" class="flex items-center space-x-1">
-              <span>{{ parent }}</span>
+            <div class="flex items-center space-x-1">
+              <span>{{ student.parents }}</span>
             </div>
           </td>
 

@@ -1,0 +1,84 @@
+<h2 mat-dialog-title class="text-lg font-bold text-white text-center">New Student</h2>
+<div mat-dialog-content class="space-y-4">
+  <form [formGroup]="newStudentForm" class="space-y-4">
+    <!-- Initials -->
+    <div>
+      <label class="block text-lg font-medium text-white">Initials</label>
+      <input
+        type="text"
+        formControlName="initials"
+        class="w-full px-3 py-2 rounded-md bg-gray-700 focus:outline-none"
+        placeholder="Enter initials"
+      />
+    </div>
+
+    <!-- Name -->
+    <div>
+      <label class="block text-lg font-medium text-white">Name</label>
+      <input
+        type="text"
+        formControlName="name"
+        class="w-full px-3 py-2 rounded-md bg-gray-700 focus:outline-none"
+        placeholder="Enter full name"
+      />
+    </div>
+
+    <!-- Parents -->
+    <div>
+      <label class="block text-lg font-medium text-white">Parents</label>
+      <input
+        type="text"
+        formControlName="parents"
+        class="w-full px-3 py-2 rounded-md bg-gray-700 focus:outline-none"
+        placeholder="Parent name"
+      />
+    </div>
+
+    <!-- Room -->
+    <div>
+      <label class="block text-lg font-medium text-white">Room</label>
+      <select
+        formControlName="room"
+        class="w-full px-3 py-2 rounded-md bg-gray-700 focus:outline-none"
+      >
+        <option value="" disabled>Select a room</option>
+        <option *ngFor="let room of rooms" [value]="room">{{ room }}</option>
+      </select>
+    </div>
+
+    <!-- Attendance -->
+    <div>
+      <label class="block text-lg font-medium text-white">Attendance</label>
+      <div formArrayName="attendance" class="flex space-x-4">
+        <div
+          *ngFor="let day of days; let i = index"
+          class="flex items-center space-x-2"
+        >
+          <input
+            type="checkbox"
+            [formControlName]="i" 
+            class="form-checkbox h-4 w-4"
+          />
+          <label>{{ day }}</label>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions class="flex justify-center space-x-4">
+  <button
+    mat-button
+    class="bg-red-700 px-4 py-2 rounded-md"
+    (click)="onCancel()"
+  >
+    Cancel
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    class="bg-blue-500 text-white px-4 py-2 rounded-md"
+    (click)="onCreate()"
+  >
+    Create
+  </button>
+</div>
