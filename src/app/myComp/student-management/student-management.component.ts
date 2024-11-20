@@ -23,7 +23,7 @@ export class StudentManagementComponent {
   students: Student[] = [
     { initials: 'AB', name: 'Alizakibe B', parents: ['Htvttth H'], room: 'Dance', attendance: [false, false, false, true, false, false, false] },
     { initials: 'AS', name: 'Anik S', parents: ['Srfe F'], room: 'Computer Room', attendance: [false, false, false, true, false, false, false] },
-    { initials: 'AD', name: 'Ankit D', parents: ['Adea Z'], room: 'Restt', attendance: [false, false, true, false, false, false, true] },
+    { initials: 'AD', name: 'Ankit D', parents: ['Adea Z'], room: 'Restt', attendance: [false, false, true, false, false, false, true] }
   ];
 
   constructor(public dialog: MatDialog) {}
@@ -40,5 +40,9 @@ export class StudentManagementComponent {
         this.students.push(result);
       }
     });
+  }
+
+  deleteStudent(index: number): void {
+    this.students.splice(index, 1);
   }
 }

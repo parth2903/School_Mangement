@@ -1,14 +1,23 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
+//import { Component, ChangeDetectionStrategy} from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+// import {MatDatepickerModule} from '@angular/material/datepicker';
+// import {MatInputModule} from '@angular/material/input';
+// import {MatFormFieldModule} from '@angular/material/form-field';
+// import {provideNativeDateAdapter} from '@angular/material/core';
+
 
 @Component({
   selector: 'app-new-student-dialog',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule,
+    ],
   templateUrl: './new-student-dialog.component.html',
-  styleUrl: './new-student-dialog.component.css'
+  styleUrl: './new-student-dialog.component.css',
+  // providers: [provideNativeDateAdapter()],
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NewStudentDialogComponent {
   newStudentForm: FormGroup;
