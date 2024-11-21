@@ -4,6 +4,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { NewStudentDialogComponent } from '../../new-student-dialog/new-student-dialog.component';
+import { GuardPracService } from '../../service/guard-prac.service';
 
 interface Student {
   initials: string;
@@ -23,10 +24,12 @@ export class StudentManagementComponent {
   students: Student[] = [
     { initials: 'AB', name: 'Alizakibe B', parents: ['Htvttth H'], room: 'Dance', attendance: [false, false, false, true, false, false, false] },
     { initials: 'AS', name: 'Anik S', parents: ['Srfe F'], room: 'Computer Room', attendance: [false, false, false, true, false, false, false] },
-    { initials: 'AD', name: 'Ankit D', parents: ['Adea Z'], room: 'Restt', attendance: [false, false, true, false, false, false, true] }
+    { initials: 'AD', name: 'Ankit D', parents: ['Adea Z'], room: 'Rest', attendance: [false, false, true, false, false, false, true] }
   ];
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private setStudent: GuardPracService) {
+    this.setStudent.setStudentsReference(this.students);
+  }
 
   openNewStudentDialog(): void {
     const dialogRef = this.dialog.open(NewStudentDialogComponent, {
@@ -38,11 +41,13 @@ export class StudentManagementComponent {
       if (result) {
         console.log(result);
         this.students.push(result);
+        this.setStudent.setStudentsReference(this.students);
       }
     });
   }
 
   deleteStudent(index: number): void {
     this.students.splice(index, 1);
+    this.setStudent.setStudentsReference(this.students);
   }
 }

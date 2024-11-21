@@ -15,6 +15,8 @@ import { RoomManagementComponent } from './myComp/room-management/room-managemen
 import { EnrollmentComponent } from './myComp/enrollment/enrollment.component';
 import { StudentManagementComponent } from './myComp/student-management/student-management.component';
 import { StaffManagementComponent } from './myComp/staff-management/staff-management.component';
+import { pracGuard } from './guard/prac.guard'; 
+//everytime with navigation angular destroy components i.e. our created students get delete. For this store students on local storage
 
 export const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
@@ -27,7 +29,7 @@ export const routes: Routes = [
   { path: 'integrations', component: IntegrationsComponent },
   { path: 'reports', component: ReportsComponent },
   { path: 'faqs', component: FaqsComponent },
-  { path: 'wNew', component: WhatNewComponent },
+  { path: 'wNew', component: WhatNewComponent, canActivate: [pracGuard]},
   { path: 'school-management/room-management', component: RoomManagementComponent },
   { path: 'school-management/staff-management', component: StaffManagementComponent },
   { path: 'school-management/student-management', component: StudentManagementComponent },
