@@ -1,32 +1,27 @@
 import { CommonModule } from '@angular/common';
-import { Component} from '@angular/core';
-//import { Component, ChangeDetectionStrategy} from '@angular/core';
+import { Component, Inject} from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
-// import {MatDatepickerModule} from '@angular/material/datepicker';
-// import {MatInputModule} from '@angular/material/input';
-// import {MatFormFieldModule} from '@angular/material/form-field';
-// import {provideNativeDateAdapter} from '@angular/material/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+
 
 
 @Component({
   selector: 'app-new-student-dialog',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule,
-    ],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './new-student-dialog.component.html',
   styleUrl: './new-student-dialog.component.css',
-  // providers: [provideNativeDateAdapter()],
-  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NewStudentDialogComponent {
   newStudentForm: FormGroup;
   days: string[] = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
   rooms: string[] = ['Dance', 'Computer Room', 'Rest', 'Library'];
+  isEditMode = false;
 
   constructor(
     public fb: FormBuilder,
-    public dialogRef: MatDialogRef<NewStudentDialogComponent>
+    public dialogRef: MatDialogRef<NewStudentDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: { student?: any }
   ) {
     this.newStudentForm = this.fb.group({
       initials: ['', [Validators.required, Validators.maxLength(2)]],
@@ -37,7 +32,20 @@ export class NewStudentDialogComponent {
         this.days.map(() => false) 
       ),
     });
+
+    if (data?.student) {
+      this.isEditMode = true;
+      this.newStudentForm.patchValue({
+        initials: data.student.initials,
+        name: data.student.name,
+        parents: data.student.parents,
+        room: data.student.room,
+        attendance: data.student.attendance,
+      });
+    }
   }
+
+
 
   updateAttendance(index: number, value: boolean): void {
     this.attendanceControls.at(index).setValue(value);
@@ -61,6 +69,12 @@ export class NewStudentDialogComponent {
       
       this.dialogRef.close(newStudent);
       
+    }
+  }
+
+  onSave(): void {
+    if (this.newStudentForm.valid) {
+      this.dialogRef.close(this.newStudentForm.value);
     }
   }
 

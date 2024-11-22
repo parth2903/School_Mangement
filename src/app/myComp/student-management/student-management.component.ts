@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, TitleCasePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -16,7 +16,7 @@ interface Student {
 @Component({
   selector: 'app-student-management',
   standalone: true,
-  imports: [MatIconModule,CommonModule, MatTableModule, MatDialogModule],
+  imports: [MatIconModule,CommonModule, MatTableModule, MatDialogModule, TitleCasePipe],
   templateUrl: './student-management.component.html',
   styleUrl: './student-management.component.css'
 })
@@ -31,10 +31,11 @@ export class StudentManagementComponent {
     this.setStudent.setStudentsReference(this.students);
   }
 
-  openNewStudentDialog(): void {
+  createNewStudent(): void {
     const dialogRef = this.dialog.open(NewStudentDialogComponent, {
       width: '1000px',
-      height: '500px'
+      height: '500px',
+      data: {}
     });
 
     dialogRef.afterClosed().subscribe((result: Student | null) => {
@@ -42,6 +43,20 @@ export class StudentManagementComponent {
         console.log(result);
         this.students.push(result);
         this.setStudent.setStudentsReference(this.students);
+      }
+    });
+  }
+
+  editStudent(index : number): void{
+    const dialogRef = this.dialog.open(NewStudentDialogComponent, {
+      width: '1000px',
+      height: '500px',
+      data: { student: this.students[index] }
+    });
+
+    dialogRef.afterClosed().subscribe((updatedStudent: Student | null) => {
+      if (updatedStudent) {
+        this.students[index] = updatedStudent; 
       }
     });
   }
