@@ -1,9 +1,17 @@
 <div class="p-6 bg-black rounded-lg shadow-lg">
   <div class="flex justify-between items-center mb-4">
-    <div class="flex items-center">
+    <div class="flex items-center space-x-4">
       <i class="fa-solid fa-school text-white text-3xl mb-6 mr-4"></i>
       <h2 class="text-xl font-semibold text-white">Student Management</h2>
+
+      <input
+        type="text"
+        [(ngModel)]="searchText"
+        placeholder="Search by student name"
+        class="bg-gray-800 text-white text-sm rounded-xl px-4 py-2"
+      />
     </div>
+  
     <button mat-raised-button class="bg-gray-800 text-white text-xl rounded-xl px-4" (click)="createNewStudent()">
       + New Student
     </button>
@@ -33,7 +41,7 @@
 
       <!-- Table Body -->
       <tbody>
-        <tr *ngFor="let student of students; let i = index" class="border-b border-gray-700 ">
+        <tr *ngFor="let student of filteredStudents(); let i = index" class="border-b border-gray-700 ">
           <!-- Student Column (25%) -->
           <td class="w-1/5 px-4 py-2 flex items-center">
             <span class="flex-shrink-0 rounded-full bg-purple-200 text-purple-600 w-8 h-8 flex items-center justify-center">{{ student.initials }}</span>

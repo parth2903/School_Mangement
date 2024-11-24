@@ -5,6 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { NewStudentDialogComponent } from '../../new-student-dialog/new-student-dialog.component';
 import { GuardPracService } from '../../service/guard-prac.service';
+import { FormsModule } from '@angular/forms';
 
 interface Student {
   initials: string;
@@ -16,7 +17,13 @@ interface Student {
 @Component({
   selector: 'app-student-management',
   standalone: true,
-  imports: [MatIconModule,CommonModule, MatTableModule, MatDialogModule, TitleCasePipe],
+  imports: [MatIconModule,
+            CommonModule, 
+            MatTableModule, 
+            MatDialogModule, 
+            TitleCasePipe,
+            FormsModule
+          ],
   templateUrl: './student-management.component.html',
   styleUrl: './student-management.component.css'
 })
@@ -26,6 +33,17 @@ export class StudentManagementComponent {
     { initials: 'AS', name: 'Anik S', parents: ['Srfe F'], room: 'Computer Room', attendance: [false, false, false, true, false, false, false] },
     { initials: 'AD', name: 'Ankit D', parents: ['Adea Z'], room: 'Rest', attendance: [false, false, true, false, false, false, true] }
   ];
+
+  searchText: any = '';
+
+  filteredStudents(): Student[] {
+    if (!this.searchText.trim()) {
+      return this.students; 
+    }
+    return this.students.filter(student =>
+      student.name.toLowerCase().includes(this.searchText.toLowerCase())
+    );
+  }
 
   constructor(public dialog: MatDialog, private setStudent: GuardPracService) {
     this.setStudent.setStudentsReference(this.students);
