@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, Inject} from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, Inject, OnInit} from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 
@@ -12,7 +12,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   templateUrl: './new-student-dialog.component.html',
   styleUrl: './new-student-dialog.component.css',
 })
-export class NewStudentDialogComponent {
+export class NewStudentDialogComponent{
   newStudentForm: FormGroup;
   days: string[] = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
   rooms: string[] = ['Dance', 'Computer Room', 'Rest', 'Library'];
@@ -45,7 +45,18 @@ export class NewStudentDialogComponent {
     }
   }
 
+  getErrorMessage(controlName: string): string {
+    const control = this.newStudentForm.get(controlName);
+    
 
+    if (control?.hasError('required')) {
+      return 'Field is required*';
+    }
+    if (control?.hasError('maxlength')) {
+      return `${controlName} should have at most 2 letters*`;
+    }
+    return '';
+  }
 
   updateAttendance(index: number, value: boolean): void {
     this.attendanceControls.at(index).setValue(value);
@@ -81,5 +92,6 @@ export class NewStudentDialogComponent {
   onCancel(): void {
     this.dialogRef.close(null);
   }
+
 
 }

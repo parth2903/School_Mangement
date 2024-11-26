@@ -21,7 +21,7 @@ import { pracGuard } from './guard/prac.guard';
 export const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'communication', component: CommunicationComponent },
-  { path: 'check-in-out', component: CheckInOutComponent },
+  { path: 'check-in-out', loadChildren:()=> import('./myComp/check-in-out/checkinout.module').then((m)=> m.CheckInOutModule) },
   { path: 'events', component: EventsComponent },
   { path: 'daily-activity', component: DailyActivityComponent },
   { path: 'fee-management', component: FeeManagementComponent },

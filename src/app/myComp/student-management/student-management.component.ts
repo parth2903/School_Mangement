@@ -37,12 +37,10 @@ export class StudentManagementComponent {
   searchText: any = '';
 
   filteredStudents(): Student[] {
-    if (!this.searchText.trim()) {
+    if (!this.searchText) {
       return this.students; 
     }
-    return this.students.filter(student =>
-      student.name.toLowerCase().includes(this.searchText.toLowerCase())
-    );
+    return this.students.filter(student => student.name.toLowerCase().includes(this.searchText.toLowerCase()));
   }
 
   constructor(public dialog: MatDialog, private setStudent: GuardPracService) {
