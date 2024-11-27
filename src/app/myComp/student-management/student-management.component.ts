@@ -1,19 +1,14 @@
 import { CommonModule, TitleCasePipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
-import { NewStudentDialogComponent } from '../../new-student-dialog/new-student-dialog.component';
+import { NewStudentDialogComponent } from '../new-student-dialog/new-student-dialog.component';
 import { GuardPracService } from '../../service/guard-prac.service';
 import { FormsModule } from '@angular/forms';
+import { Student } from '../../models/student.model';
+import { StudentService } from '../../service/student.service';
 
-interface Student {
-  initials: string;
-  name: string;
-  parents: string[];
-  room: string;
-  attendance: boolean[];
-}
 @Component({
   selector: 'app-student-management',
   standalone: true,
@@ -27,24 +22,23 @@ interface Student {
   templateUrl: './student-management.component.html',
   styleUrl: './student-management.component.css'
 })
-export class StudentManagementComponent {
-  students: Student[] = [
-    { initials: 'AB', name: 'Alizakibe B', parents: ['Htvttth H'], room: 'Dance', attendance: [false, false, false, true, false, false, false] },
-    { initials: 'AS', name: 'Anik S', parents: ['Srfe F'], room: 'Computer Room', attendance: [false, false, false, true, false, false, false] },
-    { initials: 'AD', name: 'Ankit D', parents: ['Adea Z'], room: 'Rest', attendance: [false, false, true, false, false, false, true] }
-  ];
-
+export class StudentManagementComponent implements OnInit{
+  students: Student[] = [];
   searchText: any = '';
+
+  constructor(public dialog: MatDialog, private studentService: StudentService) {}
+
+  ngOnInit(): void{
+    this.studentService.students$.subscribe(stu => {
+      this.students = stu;
+    })
+  }
 
   filteredStudents(): Student[] {
     if (!this.searchText) {
       return this.students; 
     }
     return this.students.filter(student => student.name.toLowerCase().includes(this.searchText.toLowerCase()));
-  }
-
-  constructor(public dialog: MatDialog, private setStudent: GuardPracService) {
-    this.setStudent.setStudentsReference(this.students);
   }
 
   createNewStudent(): void {
@@ -57,8 +51,7 @@ export class StudentManagementComponent {
     dialogRef.afterClosed().subscribe((result: Student | null) => {
       if (result) {
         console.log(result);
-        this.students.push(result);
-        this.setStudent.setStudentsReference(this.students);
+        this.studentService.addStudent(result);
       }
     });
   }
@@ -72,13 +65,12 @@ export class StudentManagementComponent {
 
     dialogRef.afterClosed().subscribe((updatedStudent: Student | null) => {
       if (updatedStudent) {
-        this.students[index] = updatedStudent; 
+        this.studentService.updateStudent(updatedStudent, index);
       }
     });
   }
 
   deleteStudent(index: number): void {
-    this.students.splice(index, 1);
-    this.setStudent.setStudentsReference(this.students);
+    this.studentService.deleteStudent(index);
   }
 }

@@ -21,7 +21,7 @@ import { pracGuard } from './guard/prac.guard';
 export const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'communication', component: CommunicationComponent },
-  { path: 'check-in-out', loadChildren:()=> import('./myComp/check-in-out/checkinout.module').then((m)=> m.CheckInOutModule) },
+  { path: 'check-in-out', loadChildren:() => import('./myComp/check-in-out/checkinout.module').then((m)=> m.CheckInOutModule) },
   { path: 'events', component: EventsComponent },
   { path: 'daily-activity', component: DailyActivityComponent },
   { path: 'fee-management', component: FeeManagementComponent },
@@ -29,6 +29,7 @@ export const routes: Routes = [
   { path: 'integrations', component: IntegrationsComponent },
   { path: 'reports', component: ReportsComponent },
   { path: 'faqs', component: FaqsComponent },
+  //{ path: 'wNew', component: WhatNewComponent},
   { path: 'wNew', component: WhatNewComponent, canActivate: [pracGuard]},
   { path: 'school-management/room-management', component: RoomManagementComponent },
   { path: 'school-management/staff-management', component: StaffManagementComponent },
