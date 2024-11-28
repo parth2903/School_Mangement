@@ -1,0 +1,10 @@
+<div class="bg-gray-800 p-4 rounded-lg shadow">
+  <p class="text-xl font-medium text-center">{{ student.name | titlecase}}</p>
+  <p class="text-sm text-white text-center">Today : {{ today | date: 'MMM d, yyyy' }}</p>
+  <button 
+    class="bg-blue-500 text-white mt-6 px-4 py-2 rounded w-full hover:bg-blue-600"
+    (click)="toggleCheckInOut()"
+    >
+    {{ isCheckedIn ? 'Check Out' : 'Check In'}}
+  </button>
+</div>

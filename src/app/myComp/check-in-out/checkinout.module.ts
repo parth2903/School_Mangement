@@ -1,7 +1,8 @@
 import { NgModule } from "@angular/core";
 import { CheckInOutComponent } from "./check-in-out.component";
-import path from "path";
 import { RouterModule, Routes } from "@angular/router";
+import { CommonModule } from "@angular/common";
+import { ChildCardModule } from "./child-card/child-card.module";
 
 const routes:Routes =[
   {
@@ -12,9 +13,7 @@ const routes:Routes =[
 
 @NgModule({
   declarations:[CheckInOutComponent],
-  imports:[RouterModule.forChild(routes)],
+  imports:[RouterModule.forChild(routes), CommonModule, ChildCardModule],
   providers:[]
-})
-export class CheckInOutModule{
-
-}
+})  
+export class CheckInOutModule{}
