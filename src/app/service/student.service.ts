@@ -17,7 +17,7 @@ export class StudentService {
 
   students$ = this.studentsSubject.asObservable();
   duration$ = this.durationSubject.asObservable();
-  isChecked = this.isCheckedSubject.asObservable();
+  isChecked$ = this.isCheckedSubject.asObservable();
 
   constructor() { }
 
