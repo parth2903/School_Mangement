@@ -9,7 +9,7 @@ import { StudentService } from '../../service/student.service';
 })
 export class CheckInOutComponent implements OnInit{
   students: Student[] = [];
-  studentCounters: { [key: string]: number } = {};
+  //studentCounters: { [key: string]: number } = {};
 
   constructor(private studentService: StudentService){}
 
@@ -18,11 +18,11 @@ export class CheckInOutComponent implements OnInit{
       this.students = stu;
     })
 
-    this.studentService.duration$.subscribe(durations => {
-      this.studentCounters = durations;
-      //console.log(this.studentCounters);
+    // this.studentService.duration$.subscribe(durations => {
+    //   this.studentCounters = durations;
+    //   //console.log(this.studentCounters);
       
-    });
+    // });
   }
 
   formatDuration(seconds: number): string {

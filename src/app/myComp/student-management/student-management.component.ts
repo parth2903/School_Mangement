@@ -25,7 +25,7 @@ import { StudentService } from '../../service/student.service';
 export class StudentManagementComponent implements OnInit{
   students: Student[] = [];
   searchText: any = '';
-  durations: { [key: string]: number } = {};
+  //durations: { [key: string]: number } = {};
 
   constructor(public dialog: MatDialog, private studentService: StudentService) {}
 
@@ -34,9 +34,9 @@ export class StudentManagementComponent implements OnInit{
       this.students = stu;
     });
 
-    this.studentService.duration$.subscribe(durationMap => {
-      this.durations = durationMap;
-    });
+    // this.studentService.duration$.subscribe(durationMap => {
+    //   this.durations = durationMap;
+    // });
   }
 
   filteredStudents(): Student[] {
@@ -79,9 +79,9 @@ export class StudentManagementComponent implements OnInit{
     this.studentService.deleteStudent(index);
   }
 
-  getStudentDuration(name: string): number {
-    return this.durations[name] || 0;
-  }
+  // getStudentDuration(name: string): number {
+  //   return this.durations[name] || 0;
+  // }
 
   formatDuration(seconds: number): string {
     const hours = Math.floor(seconds / 3600);

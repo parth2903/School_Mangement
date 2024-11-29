@@ -4,4 +4,6 @@ export interface Student {
   parents: string[];
   room: string;
   attendance: boolean[];
+  isCheckedIn: boolean; 
+  duration: number;
 }

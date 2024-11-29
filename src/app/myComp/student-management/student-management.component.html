@@ -72,7 +72,7 @@
           </td>
 
           <td class="w-1/10 px-4 py-2 text-center">
-            {{ formatDuration(getStudentDuration(student.name)) }}
+            {{ formatDuration(student.duration || 0) }}
           </td>
 
           <td class="w-1/10 px-4 py-2 text-center flex">

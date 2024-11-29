@@ -7,17 +7,17 @@ import { Student } from '../models/student.model';
 })
 export class StudentService {
   private studentsSubject = new BehaviorSubject<Student[]>([
-    { initials: 'AB', name: 'Alizakibe B', parents: ['Htvttth H'], room: 'Dance', attendance: [false, false, false, true, false, false, false] },
-    { initials: 'AS', name: 'Anik S', parents: ['Srfe F'], room: 'Computer Room', attendance: [false, false, false, true, false, false, false] },
-    { initials: 'AD', name: 'Ankit D', parents: ['Adea Z'], room: 'Rest', attendance: [false, false, true, false, false, false, true] },
+    { initials: 'AB', name: 'Alizakibe B', parents: ['Htvttth H'], room: 'Dance', attendance: [false, true, false, true, false, true, false], isCheckedIn: false, duration: 0 },
+    { initials: 'AS', name: 'Anik S', parents: ['Srfe F'], room: 'Computer Room', attendance: [false, true, false, true, false, true, false], isCheckedIn: false, duration: 0 },
+    { initials: 'AD', name: 'Ankit D', parents: ['Adea Z'], room: 'Rest', attendance: [false, true, true, true, false, false, true], isCheckedIn: false, duration: 0 },
   ])
-  private durationSubject = new BehaviorSubject<{[key: string]: number}>({})
-  private isCheckedSubject = new BehaviorSubject<{[key: string]: boolean}>({})
+  //private durationSubject = new BehaviorSubject<{[key: string]: number}>({})
+  //private isCheckedSubject = new BehaviorSubject<{[key: string]: boolean}>({})
   private timers: { [key: string]: any } = {};
 
   students$ = this.studentsSubject.asObservable();
-  duration$ = this.durationSubject.asObservable();
-  isChecked$ = this.isCheckedSubject.asObservable();
+  //duration$ = this.durationSubject.asObservable();
+  //isChecked$ = this.isCheckedSubject.asObservable();
 
   constructor() { }
 
@@ -43,23 +43,37 @@ export class StudentService {
   }
 
   getDuration(studentName : string): number{
-    return this.durationSubject.value[studentName] || 0
+    const student = this.studentsSubject.value.find(s => s.name == studentName)
+    return student?.duration || 0
+    //return this.durationSubject.value[studentName] || 0
   }
 
   updateDuration(studentName: string, duration: number): void {
-    const currentDurations = { ...this.durationSubject.value };
-    currentDurations[studentName] = duration;
-    this.durationSubject.next(currentDurations);
+    const currentStudents = this.studentsSubject.value;
+    const student = currentStudents.find(s => s.name === studentName);
+  
+    if (student) {
+      student.duration = duration;
+      this.studentsSubject.next([...currentStudents]);  
+    }
+    // const currentDurations = { ...this.durationSubject.value };
+    // currentDurations[studentName] = duration;
+    // this.durationSubject.next(currentDurations);
   }
 
   getIsCheckedIn(studentName: string): boolean {
-    return this.isCheckedSubject.value[studentName] || false;
+    const student = this.studentsSubject.value.find(s => s.name === studentName);
+    return student?.isCheckedIn || false;
   }
 
   updateIsCheckedIn(studentName: string, isCheckedIn: boolean): void {
-    const currentCheckedIn = { ...this.isCheckedSubject.value };
-    currentCheckedIn[studentName] = isCheckedIn;
-    this.isCheckedSubject.next(currentCheckedIn);
+    const currentStudents = this.studentsSubject.value;
+    const student = currentStudents.find(s => s.name === studentName);
+  
+    if (student) {
+      student.isCheckedIn = isCheckedIn;
+      this.studentsSubject.next([...currentStudents]); 
+    }
 
     if (isCheckedIn) {
       this.startTimer(studentName);
@@ -69,12 +83,13 @@ export class StudentService {
   }
 
   private startTimer(studentName: string): void {
-    if (this.timers[studentName]) return; 
+    if (this.timers[studentName]) 
+      return; 
 
     this.timers[studentName] = setInterval(() => {
       const currentDuration = this.getDuration(studentName);
-      const updatedDurations = { ...this.durationSubject.value, [studentName]: currentDuration + 1 };
-      this.durationSubject.next(updatedDurations);
+      const updatedDurations = currentDuration + 1;
+      this.updateDuration(studentName, updatedDurations);
     }, 1000);
   }
 
