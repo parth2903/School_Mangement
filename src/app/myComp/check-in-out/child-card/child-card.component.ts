@@ -9,7 +9,7 @@ import { StudentService } from '../../../service/student.service';
 })
 export class ChildCardComponent implements OnInit{
   @Input() student!: Student;
-  @Output() counterUpdated = new EventEmitter<{ studentName: string, duration: number }>();
+  //@Output() counterUpdated = new EventEmitter<{ studentName: string, duration: number }>();
 
   today: Date = new Date();
   isCheckedIn: boolean= false;

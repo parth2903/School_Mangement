@@ -26,7 +26,7 @@
           <th class="w-1/5 px-4 py-2 text-left">Student</th>
           <th class="w-1/5 px-4 py-2 text-left">Parents</th>
           <th class="w-1/5 px-4 py-2 text-left">Room</th>
-          <th class="w-7/20  py-2 text-center">
+          <th class="w-7/20 px-4 py-2 text-center justify-between">
               <span class="w-1/7 text-center px-3">Su</span>
               <span class="w-1/7 text-center px-3">Mo</span>
               <span class="w-1/7 text-center px-3">Tu</span>
@@ -35,6 +35,7 @@
               <span class="w-1/7 text-center px-3">Fr</span>
               <span class="w-1/7 text-center px-3">Sa</span>
           </th>
+          <th class="w-1/10 px-4 py-2 text-center">Duration</th>
           <th class="w-1/10 px-4 py-2 text-center">Actions</th>
         </tr>
       </thead>
@@ -43,9 +44,12 @@
       <tbody>
         <tr *ngFor="let student of filteredStudents(); let i = index" class="border-b border-gray-700 ">
           <!-- Student Column (25%) -->
-          <td class="w-1/5 px-4 py-2 flex items-center">
-            <span class="flex-shrink-0 rounded-full bg-purple-200 text-purple-600 w-8 h-8 flex items-center justify-center">{{ student.initials }}</span>
-            <span class="ml-2 whitespace-nowrap">{{ student.name | titlecase}}</span>
+          <td class="w-1/5 px-4 py-2 ">
+            <div class="flex items-center">
+              <span class="flex-shrink-0 rounded-full bg-purple-200 text-purple-600 w-8 h-8 flex items-center justify-center">{{ student.initials }}</span>
+              <span class="ml-2 whitespace-nowrap">{{ student.name | titlecase}}</span>
+            </div>
+            
           </td>
 
           <!-- Parents Column (20%) -->
@@ -68,6 +72,10 @@
           </td>
 
           <td class="w-1/10 px-4 py-2 text-center">
+            {{ getStudentDuration(student.name) }}s
+          </td>
+
+          <td class="w-1/10 px-4 py-2 text-center flex">
             <button mat-icon-button class="px-2" (click)="editStudent(i)">
               <mat-icon>edit</mat-icon>
             </button>

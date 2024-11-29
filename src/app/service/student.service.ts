@@ -69,7 +69,7 @@ export class StudentService {
   }
 
   private startTimer(studentName: string): void {
-    if (this.timers[studentName]) return; // Avoid duplicate timers
+    if (this.timers[studentName]) return; 
 
     this.timers[studentName] = setInterval(() => {
       const currentDuration = this.getDuration(studentName);

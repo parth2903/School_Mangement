@@ -25,13 +25,18 @@ import { StudentService } from '../../service/student.service';
 export class StudentManagementComponent implements OnInit{
   students: Student[] = [];
   searchText: any = '';
+  durations: { [key: string]: number } = {};
 
   constructor(public dialog: MatDialog, private studentService: StudentService) {}
 
   ngOnInit(): void{
     this.studentService.students$.subscribe(stu => {
       this.students = stu;
-    })
+    });
+
+    this.studentService.duration$.subscribe(durationMap => {
+      this.durations = durationMap;
+    });
   }
 
   filteredStudents(): Student[] {
@@ -72,5 +77,9 @@ export class StudentManagementComponent implements OnInit{
 
   deleteStudent(index: number): void {
     this.studentService.deleteStudent(index);
+  }
+
+  getStudentDuration(name: string): number {
+    return this.durations[name] || 0;
   }
 }

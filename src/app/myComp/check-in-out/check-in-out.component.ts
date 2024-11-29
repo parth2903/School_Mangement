@@ -25,7 +25,7 @@ export class CheckInOutComponent implements OnInit{
     });
   }
 
-  onCounterUpdate(data: { studentName: string, duration: number }): void {
-    this.studentCounters[data.studentName] = data.duration; 
-  }
+  // onCounterUpdate(data: { studentName: string, duration: number }): void {
+  //   this.studentCounters[data.studentName] = data.duration; 
+  // }
 }
