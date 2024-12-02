@@ -1,28 +1,68 @@
-<aside class="bg-purple-800 text-white w-56 h-screen p-4 flex flex-col space-y-2 fixed overflow-y-auto pb-16">
-  <a routerLink="/dashboard" class="text-lg font-semibold">Dashboard</a>
+<aside class="bg-purple-800 text-white h-screen p-2 flex flex-col space-y-2 fixed overflow-y-auto pb-16">
+  <a routerLink="/dashboard" class=" flex gap-1 text-lg font-semibold">
+    <mat-icon fontIcon="dashboard"></mat-icon>
+    <span class="hidden lg:inline">Dashboard</span>
+  </a>
 
-  <div class="space-y-2">
+  <div class="relative space-y-2">
     <div class="flex items-center justify-between cursor-pointer" (click)="toggleSchoolManagement()">
-      <span class="font-semibold text-gray-300">School Management</span>
-      <i class="fas" [ngClass]="isSchoolManagementOpen ? 'fa-chevron-down' : 'fa-chevron-up'"></i>
+        <div class="flex gap-1 whitespace-nowrap">
+            <mat-icon fontIcon="school"></mat-icon>
+            <span class="hidden lg:inline font-semibold text-gray-300">School Management</span>
+        </div>
+        
+        <i class="fas ml-1" [ngClass]="isSchoolManagementOpen ? 'fa-chevron-down' : 'fa-chevron-up'"></i>
+    </div>  
+    <div *ngIf="isSchoolManagementOpen" class="fixed left-16 top-auto bg-purple-800 border border-purple-600 shadow-lg rounded-md w-40 z-30 lg:hidden">
+      <a routerLink="/school-management/room-management" routerLinkActive="bg-purple-700" class="block hover:bg-purple-700 p-2 rounded" (click)="closeMenu()">Room Management</a>
+      <a routerLink="/school-management/student-management" routerLinkActive="bg-purple-700" class="block hover:bg-purple-700 p-2 rounded" (click)="closeMenu()">Student Management</a>
+      <a routerLink="/school-management/staff-management" routerLinkActive="bg-purple-700" class="block hover:bg-purple-700 p-2 rounded" (click)="closeMenu()">Staff Management</a>
+      <a routerLink="/school-management/enrollment" routerLinkActive="bg-purple-700" class="block hover:bg-purple-700 p-2 rounded" (click)="closeMenu()">Enrollment</a>
     </div>
-
-    <div *ngIf="isSchoolManagementOpen" class="pl-4 space-y-1">
-      <a routerLink="/school-management/room-management" routerLinkActive="bg-purple-700" class="block hover:bg-purple-700 p-2 rounded">Room Management</a>
-      <a routerLink="/school-management/student-management" routerLinkActive="bg-purple-700" class="block hover:bg-purple-700 p-2 rounded">Student Management</a>
-      <a routerLink="/school-management/staff-management" routerLinkActive="bg-purple-700" class="block hover:bg-purple-700 p-2 rounded">Staff Management</a>
-      <a routerLink="/school-management/enrollment" routerLinkActive="bg-purple-700" class="block hover:bg-purple-700 p-2 rounded">Enrollment</a>
+    
+    <div *ngIf="isSchoolManagementOpen" class="hidden lg:block pl-4 space-y-1">
+        <a routerLink="/school-management/room-management" routerLinkActive="bg-purple-700" class="block hover:bg-purple-700 p-2 rounded">Room Management</a>
+        <a routerLink="/school-management/student-management" routerLinkActive="bg-purple-700" class="block hover:bg-purple-700 p-2 rounded">Student Management</a>
+        <a routerLink="/school-management/staff-management" routerLinkActive="bg-purple-700" class="block hover:bg-purple-700 p-2 rounded">Staff Management</a>
+        <a routerLink="/school-management/enrollment" routerLinkActive="bg-purple-700" class="block hover:bg-purple-700 p-2 rounded">Enrollment</a>
     </div>
-  </div>
+</div>
 
-  <a routerLink="/communication" class="block hover:bg-purple-700 p-2 rounded">Communication</a>
-  <a routerLink="/check-in-out" class="block hover:bg-purple-700 p-2 rounded">Check In/Out</a>
-  <a routerLink="/events" class="block hover:bg-purple-700 p-2 rounded">Events</a>
-  <a routerLink="/daily-activity" class="block hover:bg-purple-700 p-2 rounded">Daily Activity</a>
-  <a routerLink="/fee-management" class="block hover:bg-purple-700 p-2 rounded">Fee Management</a>
-  <a routerLink="/authorize-pickup" class="block hover:bg-purple-700 p-2 rounded">Authorize Pickup</a>
-  <a routerLink="/integrations" class="block hover:bg-purple-700 p-2 rounded">Integrations</a>
-  <a routerLink="/reports" class="block hover:bg-purple-700 p-2 rounded">Reports</a>
-  <a routerLink="/faqs" class="block hover:bg-purple-700 p-2 rounded">FAQs</a>
+  <a routerLink="/communication" class="flex gap-1 hover:bg-purple-700 p-2 rounded ">
+    <mat-icon fontIcon="forum"></mat-icon>
+    <span class="hidden lg:inline">Communication</span>
+  </a>
+  <a routerLink="/check-in-out" class="flex gap-1 hover:bg-purple-700 p-2 rounded">
+    <mat-icon fontIcon="check-in-out"></mat-icon>
+    <span class="hidden lg:inline">Check In/Out</span>
+  </a>
+  <a routerLink="/events" class="flex gap-1 hover:bg-purple-700 p-2 rounded">
+    <mat-icon fontIcon="events"></mat-icon>
+    <span class="hidden lg:inline">Events</span>
+  </a>
+  <a routerLink="/daily-activity" class="flex gap-1 hover:bg-purple-700 p-2 rounded">
+    <mat-icon fontIcon="local_activity"></mat-icon>
+    <span class="hidden lg:inline">Daily Activity</span>
+  </a>
+  <a routerLink="/fee-management" class="flex gap-1 hover:bg-purple-700 p-2 rounded">
+    <mat-icon fontIcon="payment"></mat-icon>
+    <span class="hidden lg:inline">Management</span> 
+  </a>
+  <a routerLink="/authorize-pickup" class="flex gap-1 hover:bg-purple-700 p-2 rounded">
+    <mat-icon fontIcon="supervisor_account"></mat-icon>
+    <span class="hidden lg:inline">Authorize Pickup</span>
+  </a>
+  <a routerLink="/integrations" class="flex gap-1 hover:bg-purple-700 p-2 rounded">
+    <mat-icon fontIcon="integration_instructions"></mat-icon>
+    <span class="hidden lg:inline">Integrations</span>
+  </a>
+  <a routerLink="/reports" class="flex gap-1 hover:bg-purple-700 p-2 rounded">
+    <mat-icon fontIcon="report"></mat-icon>
+    <span class="hidden lg:inline">Reports</span>
+  </a>
+  <a routerLink="/faqs" class="flex gap-1 hover:bg-purple-700 p-2 rounded">
+    <mat-icon fontIcon="quiz"></mat-icon>
+    <span  class="hidden lg:inline">FAQs</span>
+  </a>
 </aside>
 

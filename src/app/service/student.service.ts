@@ -10,6 +10,12 @@ export class StudentService {
     { initials: 'AB', name: 'Alizakibe B', parents: ['Htvttth H'], room: 'Dance', attendance: [false, true, false, true, false, true, false], isCheckedIn: false, duration: 0 },
     { initials: 'AS', name: 'Anik S', parents: ['Srfe F'], room: 'Computer Room', attendance: [false, true, false, true, false, true, false], isCheckedIn: false, duration: 0 },
     { initials: 'AD', name: 'Ankit D', parents: ['Adea Z'], room: 'Rest', attendance: [false, true, true, true, false, false, true], isCheckedIn: false, duration: 0 },
+    { initials: 'AB', name: 'Alizakibe B', parents: ['Htvttth H'], room: 'Dance', attendance: [false, true, false, true, false, true, false], isCheckedIn: false, duration: 0 },
+    { initials: 'AS', name: 'Anik S', parents: ['Srfe F'], room: 'Computer Room', attendance: [false, true, false, true, false, true, false], isCheckedIn: false, duration: 0 },
+    { initials: 'AD', name: 'Ankit D', parents: ['Adea Z'], room: 'Rest', attendance: [false, true, true, true, false, false, true], isCheckedIn: false, duration: 0 },
+    { initials: 'AB', name: 'Alizakibe B', parents: ['Htvttth H'], room: 'Dance', attendance: [false, true, false, true, false, true, false], isCheckedIn: false, duration: 0 },
+    { initials: 'AS', name: 'Anik S', parents: ['Srfe F'], room: 'Computer Room', attendance: [false, true, false, true, false, true, false], isCheckedIn: false, duration: 0 },
+    { initials: 'AD', name: 'Ankit D', parents: ['Adea Z'], room: 'Rest', attendance: [false, true, true, true, false, false, true], isCheckedIn: false, duration: 0 },
   ])
   //private durationSubject = new BehaviorSubject<{[key: string]: number}>({})
   //private isCheckedSubject = new BehaviorSubject<{[key: string]: boolean}>({})

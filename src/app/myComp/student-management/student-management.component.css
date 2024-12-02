@@ -1,3 +1,65 @@
 .mat-warn.mat-icon {
   --mat-icon-color: #93000a;
 }
+
+th, td {
+  text-align: center;
+}
+
+/* 768px */
+@media (max-width: 768px) {
+  .w-full {
+    overflow-x: auto;
+  }
+
+  th:nth-child(2), 
+  th:nth-child(3), 
+  th:nth-child(4), 
+  td:nth-child(2),
+  td:nth-child(3),
+  td:nth-child(4) {
+    display: none;
+  }
+
+  td, th {
+    padding: 8px;
+    font-size: 12px; 
+  }
+
+  td span {
+    white-space: nowrap;
+  }
+}
+
+/* 768px - 1024px */
+@media (min-width: 768px) and (max-width: 1024px) {
+  th:nth-child(2),
+  th:nth-child(3),
+  td:nth-child(2),
+  td:nth-child(3) {
+    display: table-cell;
+  }
+
+  th:nth-child(4),
+  td:nth-child(4) {
+    display: none;
+  }
+
+  td, th {
+    padding: 10px;
+    font-size: 14px; 
+  }
+  
+}
+
+/* 1024px and above */
+@media (min-width: 1024px) {
+  th, td {
+    display: table-cell;
+  }
+
+  td, th {
+    padding: 12px;
+    font-size: 16px;
+  }
+}
